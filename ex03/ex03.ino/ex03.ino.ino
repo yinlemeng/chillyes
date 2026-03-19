@@ -6,7 +6,7 @@ SOS 规则：3次短闪 → 3次长闪 → 3次短闪 → 长停顿
 const int ONBOARD_LED_PIN = 2; // ESP32板载LED引脚
 
 // 时间参数（单位：毫秒）
-const int DOT_DURATION = 200;    // 短闪亮灯时间
+const int DOT_DURATION = 250;    // 短闪亮灯时间
 const int DASH_DURATION = 600;   // 长闪亮灯时间
 const int GAP_DURATION = 200;    // 字符间熄灭时间
 const int END_GAP_DURATION = 2000; // 完整SOS结束后的长停顿
