@@ -1,25 +1,23 @@
-/*
- 作业 2 (ex02)
- 功能：使用 millis() 实现 LED 以 1Hz 频率稳定闪烁
- 频率说明：1Hz = 亮 500ms + 灭 500ms
-*/
-const int ONBOARD_LED_PIN =2; // 使用板载LED引脚
-
-unsigned long previousMillis = 0; // 记录上一次闪烁的时间
-const long interval = 1000;       // 闪烁间隔 (1000毫秒)
-bool ledState = false;           // LED当前状态
+const int ONBOARD_LED_PIN = 2;
+const long interval = 1000;
+unsigned long previousMillis = 0;
+int ledState = LOW;
 
 void setup() {
   pinMode(ONBOARD_LED_PIN, OUTPUT);
+  // 新增：初始化串口，用于调试
+  Serial.begin(115200);
+  Serial.println("ex02: 1Hz LED Blink Started");
 }
 
 void loop() {
-  unsigned long currentMillis = millis(); // 获取当前系统运行时间
-
-  // 判断是否到达闪烁时间点
+  unsigned long currentMillis = millis();
   if (currentMillis - previousMillis >= interval) {
-    previousMillis = currentMillis;   // 记录当前时间
-    ledState = !ledState;             // 翻转状态
-    digitalWrite(ONBOARD_LED_PIN, ledState);   // 控制LED
+    previousMillis = currentMillis;
+    ledState = !ledState;
+    digitalWrite(ONBOARD_LED_PIN, ledState);
+    // 新增：打印当前LED状态
+    Serial.print("LED State: ");
+    Serial.println(ledState == HIGH ? "ON" : "OFF");
   }
 }
